@@ -12,29 +12,19 @@ type Logger struct {
 }
 
 func New(l *log.Logger) *Logger {
-	return &Logger{l}
-}
-
-func (l *Logger) Append(prefix string) UnLevelFunc {
-	oldPrefix := l.Prefix()
-	l.SetPrefix(oldPrefix + prefix)
-	return func() {
-		l.SetPrefix(oldPrefix)
+	return &Logger{
+		Logger: l,
 	}
 }
 
-func (l *Logger) Replace(prefix string) UnLevelFunc {
+func (l *Logger) SetPrefix(prefix string) UnLevelFunc {
 	oldPrefix := l.Prefix()
-	l.SetPrefix(prefix)
+	l.Logger.SetPrefix(prefix)
 	return func() {
-		l.SetPrefix(oldPrefix)
+		l.Logger.SetPrefix(oldPrefix)
 	}
 }
 
-func (l *Logger) Format(pattern string) UnLevelFunc {
-	oldPrefix := l.Prefix()
-	l.SetPrefix(fmt.Sprintf(pattern, oldPrefix))
-	return func() {
-		l.SetPrefix(oldPrefix)
-	}
+func (l *Logger) SetPrefixf(pattern string) UnLevelFunc {
+	return l.SetPrefix(fmt.Sprintf(pattern, l.Prefix()))
 }

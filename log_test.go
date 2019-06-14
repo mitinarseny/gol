@@ -8,55 +8,7 @@ import (
 	"testing"
 )
 
-func TestAppend(t *testing.T) {
-	r := require.New(t)
-
-	var buff bytes.Buffer
-	logger := log.New(&buff, "", 0)
-
-	l := New(logger)
-
-	makeAppendFor := func(count int, f func(int) string) string {
-		var s string
-		for i := 0; i < count; i++ {
-			s += f(i)
-		}
-		return s
-	}
-
-	uns := make([]UnLevelFunc, 10)
-	for n := range uns {
-		s := fmt.Sprintf("with%d", n)
-		l.Print(s)
-		r.Equal(
-			makeAppendFor(n, func(i int) string {
-				return fmt.Sprintf("prefix%d", i)
-			})+s+"\n",
-			buff.String(),
-		)
-
-		uns[n] = l.Append(fmt.Sprintf("prefix%d", n))
-
-		buff.Reset()
-	}
-
-	for n := range uns {
-		uns[len(uns)-1-n]()
-
-		s := fmt.Sprintf("with%d", len(uns)-1-n)
-		l.Print(s)
-		r.Equal(
-			makeAppendFor(len(uns)-1-n, func(i int) string {
-				return fmt.Sprintf("prefix%d", i)
-			})+s+"\n",
-			buff.String(),
-		)
-
-		buff.Reset()
-	}
-}
-
-func TestReplace(t *testing.T) {
+func TestSetPrefix(t *testing.T) {
 	r := require.New(t)
 
 	var buff bytes.Buffer
@@ -68,7 +20,7 @@ func TestReplace(t *testing.T) {
 		prefix := fmt.Sprintf("prefix%d", n)
 		s := fmt.Sprintf("with%d", n)
 
-		uns[n] = l.Replace(prefix)
+		uns[n] = l.SetPrefix(prefix)
 
 		l.Print(s)
 		r.Equal(prefix+s+"\n", buff.String())
@@ -89,7 +41,7 @@ func TestReplace(t *testing.T) {
 	}
 }
 
-func TestFormat(t *testing.T) {
+func TestSetPrefixf(t *testing.T) {
 	r := require.New(t)
 
 	var buff bytes.Buffer
@@ -115,7 +67,7 @@ func TestFormat(t *testing.T) {
 		l.Print(s)
 		r.Equal(prefix+s+"\n", buff.String())
 
-		uns[n] = l.Format(format)
+		uns[n] = l.SetPrefixf(format)
 
 		buff.Reset()
 	}
