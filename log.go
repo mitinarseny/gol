@@ -20,8 +20,16 @@ func New(l *log.Logger) *Logger {
 	}
 }
 
+func (l *Logger) PersistentPrefix() string {
+	return l.persistentPrefix
+}
+
+func (l *Logger) Prefix() string {
+	return l.prefix
+}
+
 func (l *Logger) FullPrefix() string {
-	return l.persistentPrefix + l.prefix
+	return l.PersistentPrefix() + l.Prefix()
 }
 
 func (l *Logger) SetPrefix(prefix string) RestoreFunc {
