@@ -1,5 +1,9 @@
 # golog
-Logger for Go with enhanced prefixes
+
+[![Build Status](https://travis-ci.com/mitinarseny/golog.svg?branch=master)](https://travis-ci.com/mitinarseny/golog)
+[![GoDoc](https://godoc.org/github.com/mitinarseny/golog?status.svg)](https://godoc.org/github.com/mitinarseny/golog)
+
+Logger for Go with enhanced prefixes.
 
 ## Install
 ```bash

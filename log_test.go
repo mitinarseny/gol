@@ -24,7 +24,6 @@ func TestSetPrefix(t *testing.T) {
 		l.Print(s)
 		r.Equal(prefix+s+"\n", buff.String())
 
-		fmt.Print(buff.String())
 		buff.Reset()
 	}
 
@@ -37,7 +36,6 @@ func TestSetPrefix(t *testing.T) {
 
 		uns[len(uns)-1-n]()
 
-		fmt.Print(buff.String())
 		buff.Reset()
 	}
 }
@@ -68,7 +66,6 @@ func TestSetPrefixf(t *testing.T) {
 
 		uns[n] = l.SetPrefixf(format)
 
-		fmt.Print(buff.String())
 		buff.Reset()
 	}
 	for n := range uns {
@@ -80,7 +77,6 @@ func TestSetPrefixf(t *testing.T) {
 		l.Print(s)
 		r.Equal(prefix+s+"\n", buff.String())
 
-		fmt.Print(buff.String())
 		buff.Reset()
 	}
 }
@@ -113,7 +109,6 @@ func TestSetPersistentPrefix(t *testing.T) {
 		l.Print(s)
 		r.Equal(prefix+s+"\n", buff.String())
 
-		fmt.Print(buff.String())
 		buff.Reset()
 	}
 
@@ -126,7 +121,6 @@ func TestSetPersistentPrefix(t *testing.T) {
 
 		uns[len(uns)-1-n]()
 
-		fmt.Print(buff.String())
 		buff.Reset()
 	}
 }
@@ -157,7 +151,6 @@ func TestSetPersistentPrefixf(t *testing.T) {
 
 		uns[n] = l.SetPersistentPrefixf(format)
 
-		fmt.Print(buff.String())
 		buff.Reset()
 	}
 	for n := range uns {
@@ -169,7 +162,6 @@ func TestSetPersistentPrefixf(t *testing.T) {
 		l.Print(s)
 		r.Equal(prefix+s+"\n", buff.String())
 
-		fmt.Print(buff.String())
 		buff.Reset()
 	}
 }
@@ -186,26 +178,22 @@ func TestMixedPrefix(t *testing.T) {
 	withPersistent := "with persistent"
 	l.Print(withPersistent)
 	r.Equal(persistentPrefix+withPersistent+"\n", buff.String())
-	fmt.Print(buff.String())
 	buff.Reset()
 
 	restore := l.SetPrefix(prefix)
 	withBoth := "with both"
 	l.Print(withBoth)
 	r.Equal(persistentPrefix+prefix+withBoth+"\n", buff.String())
-	fmt.Print(buff.String())
 	buff.Reset()
 
 	restore()
 	l.Print(withPersistent)
 	r.Equal(persistentPrefix+withPersistent+"\n", buff.String())
-	fmt.Print(buff.String())
 	buff.Reset()
 
 	restorePersistent()
 	withoutAny := "without any"
 	l.Print(withoutAny)
 	r.Equal(withoutAny+"\n", buff.String())
-	fmt.Print(buff.String())
 	buff.Reset()
 }
