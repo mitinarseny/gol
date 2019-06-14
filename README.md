@@ -35,6 +35,7 @@ func main() {
 	
 	restore()
 	l.Println("is very cool")
+	
 	restorePersistent()
 	l.Println("that's it :)")
 }
