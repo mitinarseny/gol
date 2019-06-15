@@ -11,9 +11,21 @@ go get github.com/mitinarseny/golog
 See documentation for this package on [GoDoc](https://godoc.org/github.com/mitinarseny/golog).
 
 ## Usage
-It is recommended to use it with `defer` keyword:
+Create `golog.Logger` from `log.Logger`:
 ```go
 l := golog.New(log.New(os.Stdout, "", 0))
+```
+Type `golog.Logger` has `*log.Logger` embedded in it, so you can use all functions from [log](https://golang.org/pkg/log/) package.
+
+You can use following functions to change prefix of logger:
+* `l.SetPersistentPrefix("prefix")`
+* `l.SetPersistentPrefixf("%s pattern")`
+* `l.SetPrefix("prefix")`
+* `l.SetPrefixf("%s pattern")`
+
+All these functions return `RestoreFunc` which can be used to restore previous prefix.
+It is recommended to use it with `defer` keyword:
+```go
 func someFunc() {
 	defer l.SetPrefixf("  %s")()
 	...
