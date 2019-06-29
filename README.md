@@ -1,4 +1,4 @@
-# golog [![Build Status](https://img.shields.io/travis/mitinarseny/golog/master.svg?style=flat-square)](https://travis-ci.com/mitinarseny/golog) [![Coverage](https://img.shields.io/codecov/c/github/mitinarseny/golog/master.svg?style=flat-square)](https://codecov.io/gh/mitinarseny/golog) [![GoDoc](https://img.shields.io/badge/godoc-reference-blue.svg?style=flat-square)](https://godoc.org/github.com/mitinarseny/golog)
+# golog [![Build Status](https://img.shields.io/travis/mitinarseny/golog/master.svg?style=flat-square)](https://travis-ci.com/mitinarseny/golog) [![Coverage](https://img.shields.io/codecov/c/github/mitinarseny/golog/master.svg?style=flat-square)](https://codecov.io/gh/mitinarseny/golog) [![ColangCI](https://golangci.com/badges/github.com/mitinarseny/golog.svg)](https://golangci.com/r/github.com/mitinarseny/golog) [![GoDoc](https://img.shields.io/badge/godoc-reference-blue.svg?style=flat-square)](https://godoc.org/github.com/mitinarseny/golog)
 
 A small wrapper for standard Go [log](https://golang.org/pkg/log/) package with enhanced prefix system.
 
