@@ -1,4 +1,4 @@
-package golog
+package golog_test
 
 import (
 	"bytes"
@@ -6,6 +6,7 @@ import (
 	"github.com/stretchr/testify/require"
 	"log"
 	"testing"
+	"os"
 )
 
 func TestSetPrefix(t *testing.T) {
@@ -199,7 +200,7 @@ func TestMixedPrefix(t *testing.T) {
 }
 
 func ExampleSetPersistentPrefix() {
-	l := golog.New(log.New(os.Stdout, "", 0))
+	l := New(log.New(os.Stdout, "", 0))
 
 	reverse := l.SetPersistentPrefix("golog ")
 
@@ -210,7 +211,7 @@ func ExampleSetPersistentPrefix() {
 }
 
 func ExampleSetPrefix(){
-	l := golog.New(log.New(os.Stdout, "", 0))
+	l := New(log.New(os.Stdout, "", 0))
 
 	reverse := l.SetPrefix("golog ")
 
@@ -220,8 +221,8 @@ func ExampleSetPrefix(){
 	l.Println("that can be easily reversed")
 }
 
-func ExampleCombined(){
-	l := golog.New(log.New(os.Stdout, "", 0))
+func Example(){
+	l := New(log.New(os.Stdout, "", 0))
 	
 	reversePersistent := l.SetPersistentPrefix("golog ")
 	l.Println("is logger for Go with enhanced prefixes")
@@ -242,8 +243,8 @@ func ExampleCombined(){
 	l.Println("that's it :)")
 }
 
-func ExampleReverseFuncDeferred(){
-	l := golog.New(log.New(os.Stdout, "", 0))
+func Example_deferred(){
+	l := New(log.New(os.Stdout, "", 0))
 
 	func(){
 		defer l.SetPrefix("reverse functions ")()
