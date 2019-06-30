@@ -199,7 +199,7 @@ func TestMixedPrefix(t *testing.T) {
 	buff.Reset()
 }
 
-func ExampleSetPersistentPrefix() {
+func ExampleLogger_SetPersistentPrefix() {
 	l := New(log.New(os.Stdout, "", 0))
 
 	reverse := l.SetPersistentPrefix("golog ")
@@ -210,7 +210,7 @@ func ExampleSetPersistentPrefix() {
 	l.Println("that can be easily reversed")
 }
 
-func ExampleSetPrefix(){
+func ExampleLogger_SetPrefix(){
 	l := New(log.New(os.Stdout, "", 0))
 
 	reverse := l.SetPrefix("golog ")
