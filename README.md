@@ -1,21 +1,21 @@
-# golog [![Build Status](https://img.shields.io/travis/mitinarseny/golog/master.svg?style=flat-square&logo=travis-ci)](https://travis-ci.org/mitinarseny/golog) [![Coverage](https://img.shields.io/codecov/c/github/mitinarseny/golog/master.svg?style=flat-square&logo=codecov&logoColor=success)](https://codecov.io/gh/mitinarseny/golog) [![ColangCI](https://golangci.com/badges/github.com/mitinarseny/golog.svg)](https://golangci.com/r/github.com/mitinarseny/golog) [![GoDoc](https://img.shields.io/badge/godoc-reference-blue.svg?style=flat-square)](https://godoc.org/github.com/mitinarseny/golog)
+# gol [![Build Status](https://img.shields.io/travis/mitinarseny/gol/master.svg?style=flat-square&logo=travis-ci)](https://travis-ci.org/mitinarseny/gol) [![Coverage](https://img.shields.io/codecov/c/github/mitinarseny/gol/master.svg?style=flat-square&logo=codecov&logoColor=success)](https://codecov.io/gh/mitinarseny/gol) [![ColangCI](https://golangci.com/badges/github.com/mitinarseny/gol.svg)](https://golangci.com/r/github.com/mitinarseny/gol) [![GoDoc](https://img.shields.io/badge/godoc-reference-blue.svg?style=flat-square)](https://godoc.org/github.com/mitinarseny/gol)
 
 A small wrapper for standard [log](https://golang.org/pkg/log/) package in Go with enhanced prefixes.
 
 ## Install
 ```bash
-go get github.com/mitinarseny/golog
+go get github.com/mitinarseny/gol
 ```
 
 ## Documentation
-See documentation for this package on [GoDoc](https://godoc.org/github.com/mitinarseny/golog).
+See documentation for this package on [GoDoc](https://godoc.org/github.com/mitinarseny/gol).
 
 ## Usage
-Create `golog.Logger` from `log.Logger`:
+Create `gol.Logger` from `log.Logger`:
 ```go
-l := golog.New(log.New(os.Stdout, "", 0))
+l := gol.New(log.New(os.Stdout, "", 0))
 ```
-Type `golog.Logger` has `*log.Logger` embedded in it, so you can use all functions from [log](https://golang.org/pkg/log/) package.
+Type `gol.Logger` has `*log.Logger` embedded in it, so you can use all functions from [log](https://golang.org/pkg/log/) package.
 
 You can use following functions to change prefix of logger:
 * `l.SetPersistentPrefix("prefix")`
@@ -39,13 +39,13 @@ Consider an example below:
 import (
 	"os"
 	"log"
-	"github.com/mitinarseny/golog"
+	"github.com/mitinarseny/gol"
 )
 
 func main() {
-	l := golog.New(log.New(os.Stdout, "", 0))
+	l := gol.New(log.New(os.Stdout, "", 0))
 	
-	r1 := l.SetPersistentPrefix("golog ")
+	r1 := l.SetPersistentPrefix("gol ")
 	l.Println("is logger for Go with enhanced prefixes")
 	
 	r2 := l.SetPrefix("is cool because ")
@@ -66,10 +66,10 @@ func main() {
 ```
 This code will produce following output:
 ```
-golog is logger for Go with enhanced prefixes
-golog is cool because you can grow prefixes easily
-golog is cool because you do not have to repeat yourself
-golog is cool because a lot of reasnons
-golog is very cool
+gol is logger for Go with enhanced prefixes
+gol is cool because you can grow prefixes easily
+gol is cool because you do not have to repeat yourself
+gol is cool because a lot of reasnons
+gol is very cool
 that's it :)
 ```
