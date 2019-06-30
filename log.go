@@ -1,3 +1,5 @@
+
+// golgo is a small wrapper for standard Go log package with enhanced prefix system.
 package golog
 
 import (
