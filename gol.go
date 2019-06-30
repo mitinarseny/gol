@@ -1,5 +1,5 @@
-// golog is a small wrapper for standard log package with enhanced prefix system.
-package golog
+// gol is a small wrapper for standard log package with enhanced prefix system.
+package gol
 
 import (
 	"fmt"

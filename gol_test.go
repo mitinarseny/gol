@@ -1,22 +1,22 @@
-package golog_test
+package gol_test
 
 import (
 	"bytes"
 	"fmt"
+	"github.com/mitinarseny/gol"
 	"github.com/stretchr/testify/require"
-	"github.com/mitinarseny/golog"
 	"log"
-	"testing"
 	"os"
+	"testing"
 )
 
 func TestSetPrefix(t *testing.T) {
 	r := require.New(t)
 
 	var buff bytes.Buffer
-	l := golog.New(log.New(&buff, "", 0))
+	l := gol.New(log.New(&buff, "", 0))
 
-	uns := make([]golog.RestoreFunc, 10)
+	uns := make([]gol.RestoreFunc, 10)
 	for n := range uns {
 		prefix := fmt.Sprintf("prefix%d", n)
 		s := fmt.Sprintf("with%d", n)
@@ -46,7 +46,7 @@ func TestSetPrefixf(t *testing.T) {
 	r := require.New(t)
 
 	var buff bytes.Buffer
-	l := golog.New(log.New(&buff, "", 0))
+	l := gol.New(log.New(&buff, "", 0))
 
 	format := "[%s]"
 
@@ -58,7 +58,7 @@ func TestSetPrefixf(t *testing.T) {
 		return s
 	}
 
-	uns := make([]golog.RestoreFunc, 10)
+	uns := make([]gol.RestoreFunc, 10)
 	for n := range uns {
 		s := fmt.Sprintf("with%d", n)
 		prefix := makeFormatFor(n, format)
@@ -88,7 +88,7 @@ func TestInitialPersistentPrefix(t *testing.T) {
 
 	var buff bytes.Buffer
 	prefix := "initial prefix"
-	l := golog.New(log.New(&buff, prefix, 0))
+	l := gol.New(log.New(&buff, prefix, 0))
 
 	s := "test"
 	l.Print(s)
@@ -99,9 +99,9 @@ func TestSetPersistentPrefix(t *testing.T) {
 	r := require.New(t)
 
 	var buff bytes.Buffer
-	l := golog.New(log.New(&buff, "", 0))
+	l := gol.New(log.New(&buff, "", 0))
 
-	uns := make([]golog.RestoreFunc, 10)
+	uns := make([]gol.RestoreFunc, 10)
 	for n := range uns {
 		prefix := fmt.Sprintf("prefix%d", n)
 		s := fmt.Sprintf("with%d", n)
@@ -131,7 +131,7 @@ func TestSetPersistentPrefixf(t *testing.T) {
 	r := require.New(t)
 
 	var buff bytes.Buffer
-	l := golog.New(log.New(&buff, "", 0))
+	l := gol.New(log.New(&buff, "", 0))
 
 	format := "[%s]"
 
@@ -143,7 +143,7 @@ func TestSetPersistentPrefixf(t *testing.T) {
 		return s
 	}
 
-	uns := make([]golog.RestoreFunc, 10)
+	uns := make([]gol.RestoreFunc, 10)
 	for n := range uns {
 		s := fmt.Sprintf("with%d", n)
 		prefix := makeFormatFor(n, format)
@@ -172,7 +172,7 @@ func TestMixedPrefix(t *testing.T) {
 	r := require.New(t)
 
 	var buff bytes.Buffer
-	l := golog.New(log.New(&buff, "", 0))
+	l := gol.New(log.New(&buff, "", 0))
 	persistentPrefix := "persistentPrefix"
 	prefix := "prefix"
 
@@ -201,56 +201,56 @@ func TestMixedPrefix(t *testing.T) {
 }
 
 func ExampleLogger_SetPersistentPrefix() {
-	l := golog.New(log.New(os.Stdout, "", 0))
+	l := gol.New(log.New(os.Stdout, "", 0))
 
-	reverse := l.SetPersistentPrefix("golog ")
+	reverse := l.SetPersistentPrefix("gol ")
 
 	l.Println("has persistent prefixes")
 	reverse()
-	
+
 	l.Println("that can be easily reversed")
 }
 
-func ExampleLogger_SetPrefix(){
-	l := golog.New(log.New(os.Stdout, "", 0))
+func ExampleLogger_SetPrefix() {
+	l := gol.New(log.New(os.Stdout, "", 0))
 
-	reverse := l.SetPrefix("golog ")
+	reverse := l.SetPrefix("gol ")
 
 	l.Println("has prefixes")
 	reverse()
-	
+
 	l.Println("that can be easily reversed")
 }
 
-func Example(){
-	l := golog.New(log.New(os.Stdout, "", 0))
-	
-	reversePersistent := l.SetPersistentPrefix("golog ")
+func Example() {
+	l := gol.New(log.New(os.Stdout, "", 0))
+
+	reversePersistent := l.SetPersistentPrefix("gol ")
 	l.Println("is logger for Go with enhanced prefixes")
-	
+
 	reverse1 := l.SetPrefix("is cool because ")
 	l.Println("you can grow prefixes easily")
-	
+
 	reverse2 := l.SetPrefixf("%syou ")
 	l.Println("do not have to repeat yourself")
-	
+
 	reverse2()
 	l.Println("it is easy to restore previous prefixes")
-	
+
 	reverse1()
 	l.Println("is very cool")
-	
+
 	reversePersistent()
 	l.Println("that's it :)")
 }
 
-func Example_deferred(){
-	l := golog.New(log.New(os.Stdout, "", 0))
+func Example_deferred() {
+	l := gol.New(log.New(os.Stdout, "", 0))
 
-	func(){
+	func() {
 		defer l.SetPrefix("reverse functions ")()
 
-		func(){
+		func() {
 			defer l.SetPrefixf("%sare especially convenient ")()
 
 			l.Println("when each function is associated with its own prefix, so")
