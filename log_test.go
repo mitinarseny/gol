@@ -197,3 +197,65 @@ func TestMixedPrefix(t *testing.T) {
 	r.Equal(withoutAny+"\n", buff.String())
 	buff.Reset()
 }
+
+func ExampleSetPersistentPrefix() {
+	l := golog.New(log.New(os.Stdout, "", 0))
+
+	reverse := l.SetPersistentPrefix("golog ")
+
+	l.Println("has persistent prefixes")
+	reverse()
+	
+	l.Println("that can be easily reversed")
+}
+
+func ExampleSetPrefix(){
+	l := golog.New(log.New(os.Stdout, "", 0))
+
+	reverse := l.SetPrefix("golog ")
+
+	l.Println("has prefixes")
+	reverse()
+	
+	l.Println("that can be easily reversed")
+}
+
+func ExampleCombined(){
+	l := golog.New(log.New(os.Stdout, "", 0))
+	
+	reversePersistent := l.SetPersistentPrefix("golog ")
+	l.Println("is logger for Go with enhanced prefixes")
+	
+	reverse1 := l.SetPrefix("is cool because ")
+	l.Println("you can grow prefixes easily")
+	
+	reverse2 := l.SetPrefixf("%syou ")
+	l.Println("do not have to repeat yourself")
+	
+	reverse2()
+	l.Println("it is easy to restore previous prefixes")
+	
+	reverse1()
+	l.Println("is very cool")
+	
+	reversePersistent()
+	l.Println("that's it :)")
+}
+
+func ExampleReverseFuncDeferred(){
+	l := golog.New(log.New(os.Stdout, "", 0))
+
+	func(){
+		defer l.SetPrefix("reverse functions ")()
+
+		func(){
+			defer l.SetPrefixf("%sare especially convenient ")()
+
+			l.Println("when each function is associated with its own prefix, so")
+		}()
+
+		l.Println("have no need to be cared about")
+	}()
+
+	l.Println("they are executed automatically!")
+}
