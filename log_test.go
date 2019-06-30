@@ -16,7 +16,7 @@ func TestSetPrefix(t *testing.T) {
 	var buff bytes.Buffer
 	l := golog.New(log.New(&buff, "", 0))
 
-	uns := make([]RestoreFunc, 10)
+	uns := make([]golog.RestoreFunc, 10)
 	for n := range uns {
 		prefix := fmt.Sprintf("prefix%d", n)
 		s := fmt.Sprintf("with%d", n)
@@ -58,7 +58,7 @@ func TestSetPrefixf(t *testing.T) {
 		return s
 	}
 
-	uns := make([]RestoreFunc, 10)
+	uns := make([]golog.RestoreFunc, 10)
 	for n := range uns {
 		s := fmt.Sprintf("with%d", n)
 		prefix := makeFormatFor(n, format)
@@ -101,7 +101,7 @@ func TestSetPersistentPrefix(t *testing.T) {
 	var buff bytes.Buffer
 	l := golog.New(log.New(&buff, "", 0))
 
-	uns := make([]RestoreFunc, 10)
+	uns := make([]golog.RestoreFunc, 10)
 	for n := range uns {
 		prefix := fmt.Sprintf("prefix%d", n)
 		s := fmt.Sprintf("with%d", n)
@@ -143,7 +143,7 @@ func TestSetPersistentPrefixf(t *testing.T) {
 		return s
 	}
 
-	uns := make([]RestoreFunc, 10)
+	uns := make([]golog.RestoreFunc, 10)
 	for n := range uns {
 		s := fmt.Sprintf("with%d", n)
 		prefix := makeFormatFor(n, format)
@@ -212,7 +212,7 @@ func ExampleLogger_SetPersistentPrefix() {
 }
 
 func ExampleLogger_SetPrefix(){
-	l := New(log.New(os.Stdout, "", 0))
+	l := golog.New(log.New(os.Stdout, "", 0))
 
 	reverse := l.SetPrefix("golog ")
 
