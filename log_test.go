@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"fmt"
 	"github.com/stretchr/testify/require"
+	"github.com/mitinarseny/golog"
 	"log"
 	"testing"
 	"os"
@@ -13,7 +14,7 @@ func TestSetPrefix(t *testing.T) {
 	r := require.New(t)
 
 	var buff bytes.Buffer
-	l := New(log.New(&buff, "", 0))
+	l := golog.New(log.New(&buff, "", 0))
 
 	uns := make([]RestoreFunc, 10)
 	for n := range uns {
@@ -45,7 +46,7 @@ func TestSetPrefixf(t *testing.T) {
 	r := require.New(t)
 
 	var buff bytes.Buffer
-	l := New(log.New(&buff, "", 0))
+	l := golog.New(log.New(&buff, "", 0))
 
 	format := "[%s]"
 
@@ -87,7 +88,7 @@ func TestInitialPersistentPrefix(t *testing.T) {
 
 	var buff bytes.Buffer
 	prefix := "initial prefix"
-	l := New(log.New(&buff, prefix, 0))
+	l := golog.New(log.New(&buff, prefix, 0))
 
 	s := "test"
 	l.Print(s)
@@ -98,7 +99,7 @@ func TestSetPersistentPrefix(t *testing.T) {
 	r := require.New(t)
 
 	var buff bytes.Buffer
-	l := New(log.New(&buff, "", 0))
+	l := golog.New(log.New(&buff, "", 0))
 
 	uns := make([]RestoreFunc, 10)
 	for n := range uns {
@@ -130,7 +131,7 @@ func TestSetPersistentPrefixf(t *testing.T) {
 	r := require.New(t)
 
 	var buff bytes.Buffer
-	l := New(log.New(&buff, "", 0))
+	l := golog.New(log.New(&buff, "", 0))
 
 	format := "[%s]"
 
@@ -171,7 +172,7 @@ func TestMixedPrefix(t *testing.T) {
 	r := require.New(t)
 
 	var buff bytes.Buffer
-	l := New(log.New(&buff, "", 0))
+	l := golog.New(log.New(&buff, "", 0))
 	persistentPrefix := "persistentPrefix"
 	prefix := "prefix"
 
@@ -200,7 +201,7 @@ func TestMixedPrefix(t *testing.T) {
 }
 
 func ExampleLogger_SetPersistentPrefix() {
-	l := New(log.New(os.Stdout, "", 0))
+	l := golog.New(log.New(os.Stdout, "", 0))
 
 	reverse := l.SetPersistentPrefix("golog ")
 
@@ -222,7 +223,7 @@ func ExampleLogger_SetPrefix(){
 }
 
 func Example(){
-	l := New(log.New(os.Stdout, "", 0))
+	l := golog.New(log.New(os.Stdout, "", 0))
 	
 	reversePersistent := l.SetPersistentPrefix("golog ")
 	l.Println("is logger for Go with enhanced prefixes")
@@ -244,7 +245,7 @@ func Example(){
 }
 
 func Example_deferred(){
-	l := New(log.New(os.Stdout, "", 0))
+	l := golog.New(log.New(os.Stdout, "", 0))
 
 	func(){
 		defer l.SetPrefix("reverse functions ")()
