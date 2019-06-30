@@ -1,4 +1,4 @@
-module github.com/mitinarseny/golog
+module github.com/mitinarseny/gol
 
 go 1.12
 
